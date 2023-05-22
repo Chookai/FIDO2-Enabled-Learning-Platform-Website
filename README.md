@@ -1,4 +1,4 @@
-# change directory
+# Change directory
 
 `cd fido_project`
 
@@ -73,7 +73,7 @@ Export password for the certificates are `Django1234`
 
 
 # Self-signed SSL Certificates for HTTPS Connection 
-# Source Code
+Source Code
 `https://github.com/FiloSottile/mkcert`
 
 1. Install the mkcert tool
