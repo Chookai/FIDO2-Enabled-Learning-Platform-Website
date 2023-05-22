@@ -15,10 +15,10 @@
 3. Activates the Python virtual environment.
 
 
-    # Windows Powershell
+    Windows Powershell
     `myenv\Scripts\activate`
 
-    # Linux 
+    Linux 
     `source myenv/bin/activate`
 
     To deactivate virtual environment
