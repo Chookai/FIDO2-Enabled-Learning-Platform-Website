@@ -53,7 +53,7 @@ After installing the database and create an account, include the details in sett
 The PORT for the database must not be the same as the port with the local developement server (8000).
 
 # Self-signed SSL Certificates for Digital Signature 
-# Reference
+Reference
 `https://www.ibm.com/docs/en/api-connect/2018.x?topic=overview-generating-self-signed-certificate-using-openssl`
 
 Export password for the certificates are `Django1234`
