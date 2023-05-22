@@ -1,0 +1,162 @@
+{% extends 'home/base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="../../static/css/main.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script type="application/javascript" src="{% static 'js/cbor.js'%}"></script>
+<script type="application/javascript" src="{% static 'js/ua-parser.min.js'%}"></script>
+<script src="{% static 'jquery/jquery.min.js'%}"></script>
+
+
+
+<div class="container-fluid my-4 px-4">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{%url 'home' %}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{%url 'profile_page' %}">Profile</a></li>
+              <!-- USE JS ONCLICK -->
+              <li class="breadcrumb-item active" aria-current="page">Edit_Profile</li>
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-lg pt-1">
+
+
+  <div class="row justify-content-md-center pb-3">
+
+    <div class="col col-lg-5 py-2">
+      <!-- when large take up only 5 spaces, else take up full page   -->
+      <div class="card border-primary">
+        <form role="form" method="post" action="">
+
+          {% csrf_token %}
+          <div class="card-header text-center ">
+            <h5 class="title">Edit Profile</h5>
+            {% if msg %}
+            <span class="text-danger">{{ msg }}</span>
+            {% endif %}
+            {% if form.name.errors %}
+            <div class="error">{{ form.name.errors.as_text }}</div>
+            {% endif %}
+
+          </div>
+
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="form-label"> <b>Role</b> </label>
+
+              <div class="row">
+                <div class="col-3">
+                  <!-- Uncomment this for switching role easier duing development -->
+                  <!-- {{form.role}} -->
+                  <div class="card p-1">
+                    {{model.role}}
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+            {% if model.role == "Lecturer"%}
+            <div class="mb-3">
+              <label class="form-label">Module Convenor</label>
+              <br>
+              {{ form.module_convenor }}
+              <div class="row">
+                <div class="col-3">
+                  <div class="card p-1">
+                    {{model.module_convenor}}
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+            {% endif %}
+            <div class="mb-3">
+              <label class="form-label">Default Authentication Method</label>
+
+              <br>
+              {{ form.default_authentication_method}}
+
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Multi Factor Authentication Method</label>
+
+              <br>
+              {% for a in form.multi_factor_authentication_method %}
+              {{ a }} &nbsp &nbsp &nbsp
+              {% endfor %}
+            </div>
+
+
+            <div class="mb-3">
+              <label class="form-label">Number</label>
+              <br>
+              {{ form.number }}
+
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Extension </label>
+              <br>
+              {{ form.extension }}
+
+            </div>
+
+
+
+          </div>
+
+          <div class="card-footer">
+
+            <div class="row">
+              <div class="d-flex justify-content-between ">
+                <div class="p-2">
+                  <button type="submit" name="login"
+                    class="btn btn-fill btn-primary justify-content-end">Submit</button>
+                  &nbsp; &nbsp;
+
+                </div>
+                <div class="p-2">
+                  <a href="">Back</a>
+                  <!-- USE JS ONCLIK HERE TO GO BACK HISTOREY -->
+                </div>
+
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+  </form>
+
+</div>
+
+
+
+
+{% endblock %}

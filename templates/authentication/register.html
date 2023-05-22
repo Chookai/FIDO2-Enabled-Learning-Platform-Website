@@ -1,0 +1,131 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-lg">
+	<div class="row justify-content-md-center">
+		<div class="col">
+
+			<div class="card border-2 m-3">
+				<div class="row">
+					<div class="col-5">
+						<img src="{% static 'assets/Registration.jpg' %}" alt="Image" class="card-img">
+					</div>
+					<div class="col-7">
+
+
+						<form method="post" action="">
+
+							{% csrf_token %}
+
+							<div class="card-body">
+								<h3 class="title text-center"><b>Registration Form</b></h3>
+
+								<h6 class="card-category text-center">
+									{% if msg %}
+									<span class="text-danger ">{{ msg }}</span>
+
+									{% endif %}
+								</h6>
+								{% if form.name.errors %}
+								<div class="error text-center"> ahah {{ form.name.errors.as_text }}</div>
+								{% endif %}
+								<div class="row">
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Full Name</label>
+											{{ form.first_name }}
+											<div id="Password1" class="form-text">First Name</div>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label"></label>
+											{{ form.last_name }}
+											<div class="form-text">Last Name</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Username</label>
+											{{ form.username }}
+
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Email</label>
+											{{ form.email }}
+
+										</div>
+									</div>
+
+								</div>
+
+
+
+
+								<div class="row">
+
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Password1</label>
+											{{ form.password1 }}
+
+										</div>
+										<span class="text-danger">{{ form.password1.errors }}</span>
+									</div>
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Password Check</label>
+											{{ form.password2 }}
+
+										</div>
+
+									</div>
+									<div class="form-text">Your password must be 8-20 characters long, contain
+										letters and numbers, and must not contain spaces, special characters, or
+										emoji.</div>
+
+									<span class="text-danger">{{ form.password2.errors }}</span>
+								</div>
+
+								<span class="text-danger">{{ form.password2.errors }}</span>
+								<div class="row">
+									<div class="justify-content-center">
+										<button type="submit" name="register" class="btn btn-success w-100">Register</button>
+										&nbsp; &nbsp;
+										<p>Have an existing account? <a href="{% url 'login' %}" class="text-primary">Login</a>
+		
+										</p>
+		
+		
+									</div>
+	
+								</div>
+
+							</div>
+							
+							
+
+
+
+
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

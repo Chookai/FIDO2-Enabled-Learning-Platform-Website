@@ -1,0 +1,214 @@
+{% load static%}
+
+<div class="row">
+    <div class="col">
+        {% if details %}
+        {% for a in details %}
+        {% if a.Type == "Individual" %}
+        <div class="card p-2 mb-3 shadow-sm">
+            <div class="card-title px-3">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <span class="fw-bold text-secondary">
+
+                            <h2 class="mb-1">
+                                {{a.Title}}
+                            </h2>
+                        </span>
+                    </div>
+                    <div>
+                        <a href="{% url 'one_off_digital_signature_start' a.Title %}">
+                            <button class="btn btn-fill btn-success">
+                                One-time Sign Off
+                            </button></a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div style="height: 400px; overflow-y: scroll;">
+
+                <table class="table table-striped table-bordered ">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Student's Username</th>
+                            <th>Submission Title</th>
+                            <th>Submitted File</th>
+                            <th>Submission ID</th>
+                            <th>Submission Timestamp</th>
+                            <!-- <th>Similarity</th>-->
+                            <th>Grade</th>
+                            <th>Edit Grade</th>
+                            <th>Grade SignOff</th>
+                            <th>Signature Timestamp</th>
+                            <th>Signature</th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if request.session.Module == "HDL"%}
+                        {% for d in a.hdl_coursework.all %}
+                        {% if d.docfile_individual != '' %}
+                        <tr>
+
+
+                            <td>{{d.submitted_by}}</td>
+                            <td>{{a.Title}} </td>
+                            
+                            <td><a href="{{ MEDIA_URL }}{{ d.docfile_individual }}" download>{{d.docfile_individual}}</a>
+                            <td>{{d.submission_id}}</td>
+                            <td>{{d.submission_timestamp}}</td>
+
+                            <td>{{d.grade}}</td>
+                            <form method="POST">
+                                <td>
+                                    {% csrf_token %}
+                                    {{ form2.grade }}
+                                    
+                                    <input type="hidden" name="submission_id" value="{{ d.submission_id }}">
+    
+                                </td>
+
+                            <td>{{d.lecturer_signature}}</td>
+                            <td>{{d.signature_timestamp}}</td>
+                            {% if d.lecturer_signature == False %}
+                            <td> 
+                                    <button type="submit" class="btn btn-fill btn-success">
+                                        Sign
+                                    </button>
+                            </td>
+                            {% else %}
+                            <td> 
+                                <button type="submit" class="btn btn-fill btn-secondary">
+                                    ReSign
+                                </button>
+                            </td>
+                            {% endif %}
+                        </form>
+
+
+
+
+                        </tr>
+
+                        {% endif %}
+                        {% endfor %}
+
+                        {% elif request.session.Module == "AI"%}
+                        {% for d in a.ai_coursework.all %}
+                        {% if d.docfile_individual != '' %}
+                        <tr>
+
+
+                            <td>{{d.submitted_by}}</td>
+                            <td>{{a.Title}}</td>
+                            <td><a href="{{ MEDIA_URL }}{{ d.docfile_individual }}" download>{{d.docfile_individual}}</a>
+                            <td>{{d.submission_id}}</td>
+                            <td>{{d.submission_timestamp}}</td>
+
+                            <td>{{d.grade}}</td>
+                            <form method="POST">
+                            <td>
+                                {% csrf_token %}
+                                {{ form2.grade }}
+                                
+                                <input type="hidden" name="submission_id" value="{{ d.submission_id }}">
+
+                            </td>
+                            <td>{{d.lecturer_signature}}</td>
+                            <td>{{d.signature_timestamp}}</td>
+                            {% if d.lecturer_signature == False %}
+                            <td> 
+                                    <button type="submit" class="btn btn-fill btn-success">
+                                        Sign
+                                    </button>
+                            </td>
+                            {% else %}
+                            <td> 
+                                <button type="submit" class="btn btn-fill btn-secondary">
+                                    ReSign
+                                </button>
+                            </td>
+                            {% endif %}
+                        </form>
+
+
+
+
+                        </tr>
+
+                        {% endif %}
+                        {% endfor %}
+
+                        {% elif request.session.Module == "PE"%}
+                        {% for d in a.pe_coursework.all %}
+                        {% if d.docfile_individual != '' %}
+                        <tr>
+
+
+                            <td>{{d.submitted_by}}</td>
+                            <td>{{a.Title}}</td>
+                            <td><a href="{{ MEDIA_URL }}{{d.docfile_individual}}" download>{{d.docfile_individual}}</a>
+                            
+                            <td>{{d.submission_id}}</td>
+                            <td>{{d.submission_timestamp}}</td>
+
+                            <td>{{d.grade}}</td>
+                            <form method="POST">
+                            <td>
+                                {% csrf_token %}
+                                {{ form2.grade }}
+                                
+                                <input type="hidden" name="submission_id" value="{{ d.submission_id }}">
+
+                            </td>
+
+                            <td>{{d.lecturer_signature}}</td>
+                            <td>{{d.signature_timestamp}}</td>
+                            {% if d.lecturer_signature == False %}
+                            <td> 
+                                    <button type="submit" class="btn btn-fill btn-success">
+                                        Sign
+                                    </button>
+                            </td>
+                            {% else %}
+                            <td> 
+                                <button type="submit" class="btn btn-fill btn-secondary">
+                                    ReSign
+                                </button>
+                            </td>
+                            {% endif %}
+                        </form>
+
+
+
+
+                        </tr>
+
+                        {% endif %}
+                        {% endfor %}
+
+
+
+
+                        {% endif %}
+
+                    </tbody>
+
+
+
+                </table>
+
+
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+
+    </div>
+</div>

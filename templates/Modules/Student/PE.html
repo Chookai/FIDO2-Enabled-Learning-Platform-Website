@@ -1,0 +1,226 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block head %}
+
+<link rel="stylesheet" href="../../static/css/main.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+{% endblock %}
+{% block content %}
+
+<div class="container-fluid my-4 px-4">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="card shadow-sm">
+
+
+                        <div class="card-body">
+
+                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{%url 'home' %}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Power Electronic Application
+                                        and
+                                        Control </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid my-4 px-4">
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="card-title px-3 ">
+                                <span class="fw-bold text-dark">
+
+                                    <h1 class="mb-1">
+                                        Power Electronic Application and Control (EEEE3112 UNMC) (SPM2 22-23)
+                                    </h1>
+
+
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <h5>
+                                    Course Summary
+                                </h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt fugit quasi
+                                    accusantium debitis
+                                    ratione ad in aspernatur nihil unde perspiciatis, voluptate maiores labore minima et
+                                    autem
+                                    temporibus, beatae nobis quae?</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pb-4">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row pb-3">
+                        <div class="col">
+                            <div class="card px-2 py-3 shadow-sm">
+                                <div class="card-title px-3">
+                                    <span class="fw-bold text-secondary">
+
+                                        <h2 class="mb-1">
+                                            EEEE4133 List of Coursework Available
+                                        </h2>
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    <div style="height: 300px; overflow-y: scroll;">
+                                        <table class="table table-striped table-bordered ">
+                                            <thead class="table-dark">
+                                                <tr>
+
+                                                    <th>Coursework Title</th>
+                                                    <th>Submission Date</th>
+                                                    <th>Type</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+
+                                                    {% if cw %}
+                                                    {% for cw in cw %}
+
+                                                    <td> <a href="{% url 'Submission_Page' cw.Title %}">{{cw.Title}}</a>
+                                                    </td>
+
+                                                    <td>{{cw.Submission_Date}}</td>
+                                                    <td>{{cw.Type}}</td>
+
+
+                                                </tr>
+                                                {% endfor %}
+
+                                                {% else %}
+                                                <td>No Coursework Available.</td>
+                                                {% endif %}
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    {% if request.session.role == "Lecturer" and request.session.Module == request.session.Module_Convenor %}
+
+    <div class="row pb-3">
+        <div class="col">
+            <dic class="card shadow">
+
+                <div class="card-body">
+                    {% include 'Modules/Lecturer/addNewCoursework.html' %}
+
+                </div>
+
+            </dic>
+        </div>
+    </div>
+
+
+    <div class="row pb-4">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row pb-3">
+                        <div class="col">
+
+                            <div class="card px-2 py-3 shadow-sm">
+                                <div class="card-title px-3">
+                                    <span class="fw-bold text-secondary">
+
+                                        <h2 class="mb-1">
+                                            EEEE4133 Coursework Lecturer Section (Individual)
+                                        </h2>
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    {% include 'Modules/Lecturer/Individual.html' %}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row pb-3">
+                        <div class="col">
+
+                            <div class="card px-2 py-3 shadow-sm">
+                                <div class="card-title px-3">
+                                    <span class="fw-bold text-secondary">
+
+                                        <h2 class="mb-1">
+                                            EEEE4133 Coursework Lecturer Section (Group)
+                                        </h2>
+                                    </span>
+                                </div>
+                                <div class="card-body">
+                                    {% include 'Modules/Lecturer/group.html' %}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    {%endif%}
+
+
+
+</div>
+
+<script src="{% static 'jquery/jquery.min.js'%}"></script>
+
+
+{% endblock %}

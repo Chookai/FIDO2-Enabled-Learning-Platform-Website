@@ -1,0 +1,313 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    /* Style for the toast container */
+    .toast-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1;
+    }
+</style>
+
+<div class="container-fluid my-3">
+    <!-- Content here -->
+    <div class="row pb-4">
+        <div class="col-sm col-lg-9">
+            <div class="card-group">
+                <div class="card px-2 py-3 shadow p-2 mb-2 bg-white rounded">
+                    <div class="card-title px-3 ">
+
+                        <span class="fw-bold text-secondary">
+
+                            <h4>
+                                Module Overview
+                            </h4>
+                        </span>
+
+                    </div>
+                    <div class="card-body ">
+                        <div class="d-flex mb-3">
+                            <div class="me-auto">
+                                <a href="#" class="btn btn-outline-secondary" role="button" data-bs-toggle="button">In
+                                    Progress</a>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-outline-secondary" role="button"
+                                    data-bs-toggle="button">Module
+                                    Name</a>
+                            </div>
+                            <div class="dropdown ">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    View
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item active" href="#">Card</a></li>
+                                    <li><a class="dropdown-item" href="#">List</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--  First Row of Modules-->
+                        <div class="row">
+                            <div class="col-lg-4 mb-3">
+                                <a href="{% url 'AI' %}">
+                                    <div class="card shadow-sm  p-2 mb-2 bg-white rounded">
+                                        <img class="img-fluid" src="{% static 'assets/Modules/b.png'%}"
+                                            class="card-img-top" alt="..." style="width:100%; height:150px;">
+                                        <div class="card-body">
+                                            Artificial Intelligent and Intelligence System
+
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div class="col-lg-4 mb-3">
+                                <a href="{% url 'HDL' %}">
+                                    <div class="card shadow-sm  p-2 mb-2 bg-white rounded">
+                                        <img src="{% static 'assets/Modules/e.png'%}" class="card-img-top" alt="..."
+                                            style="width:100%; height:150px;">
+                                        <div class="card-body">
+                                            HDL for Programmable Logic with Project
+
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div class="col-lg-4 mb-3">
+                                <a href="{% url 'PE' %}">
+                                    <div class="card shadow-sm p-2 mb-2 bg-white rounded ">
+                                        <img src="{% static 'assets/Modules/c.jpg'%}" class="card-img-top" alt="..."
+                                            style="width:100%; height:150px;">
+                                        <div class="card-body">
+                                            Power Electronic Application and Control
+
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <!-- Second Row of Modules -->
+                        <div class="row">
+                            <div class="col-lg-4 mb-3">
+                                <a href="">
+                                    <div class="card shadow-sm  p-2 mb-2 bg-white rounded">
+                                        <img src="{% static 'assets/Modules/f.png'%}" class="card-img-top" alt="..."
+                                            style="width:100%; height:150px;">
+                                        <div class="card-body">
+                                            EEE Student Community and Handbook (UNUK) (22-23)
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div class="col-lg-4 mb-3">
+                                <a href="">
+                                    <div class="card shadow-sm  p-2 mb-2 bg-white rounded">
+                                        <img src="{% static 'assets/Modules/g.png'%}" class="card-img-top" alt="..."
+                                            style="width:100%; height:150px;">
+                                        <div class="card-body">
+                                            Projects in Mechatronics and Electrical
+                                            and Electronic Engineering
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div class="col-lg-4 mb-3">
+                                <a href="">
+                                    <div class="card shadow-sm p-2 mb-2 bg-white rounded ">
+                                        <img src="{% static 'assets/Modules/d.png'%}" class="card-img-top" alt="..."
+                                            style="width:100%; height:150px;">
+                                        <div class="card-body">
+                                            Field Waves and Antennas (EEEE3122 UNMC)
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <div class="card px-2 py-2 mb-3 shadow p-2 mb-2 bg-white rounded">
+                <div class="card-title">
+
+                    <span class="fw-bold text-secondary">
+
+                        <h5>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                            Signature approval required
+                        </h5>
+                    </span>
+                </div>
+
+                <ul class="list-group">
+
+
+                    <a href="{% url 'profile_page'%}" class="list-group-item list-group-item-action">View</a>
+                </ul>
+
+            </div>
+            <div class="card px-2 py-2 mb-3 shadow p-2 mb-2 bg-white rounded">
+                <div class="card-title">
+                    <span class="fw-bold text-secondary">
+
+                        <h5>
+                            Coursework Submission available
+                        </h5>
+                    </span>
+
+                </div>
+
+                <ul class="list-group">
+                    {% if request.session.role == "Student"%}
+                    {% if AI_CW.CW%}
+                    {% for cw in AI_CW.CW %}
+
+                    <a href="{% url cw.module %}" class="list-group-item list-group-item-action">
+                        <span class="fw-bold text-secondary">
+
+                            {{cw.Title}}
+                        </span>
+
+                        <br> {{cw.Submission_Date}}
+                    </a>
+
+                    {% endfor %}
+                    {% endif %}
+                    {% if PE_CW.CW%}
+                    {% for cw in PE_CW.CW %}
+
+                    <a href="{% url cw.module %}" class="list-group-item list-group-item-action">
+                        <span class="fw-bold text-secondary">
+
+                            {{cw.Title}}
+                        </span>
+                        <br> {{cw.Submission_Date}}
+                    </a>
+
+                    {% endfor %}
+                    {% endif %}
+                    {% if HDL_CW.CW%}
+                    {% for cw in HDL_CW.CW %}
+
+                    <a href="{% url cw.module %}" class="list-group-item list-group-item-action">
+                        <span class="fw-bold text-secondary">
+
+                            {{cw.Title}}
+                        </span>
+                        <br> {{cw.Submission_Date}}
+                    </a>
+
+                    {% endfor %}
+                    {% endif %}
+
+                    {% else %}
+                    {% if request.session.Module_Convenor == "HDL" %}
+                    {% if HDL_CW.CW%}
+                    {% for cw in HDL_CW.CW %}
+
+                    <a href="{% url cw.module %}" class="list-group-item list-group-item-action">
+                        <span class="fw-bold text-secondary">
+
+                            {{cw.Title}}
+                        </span>
+                        <br> {{cw.Submission_Date}}
+                    </a>
+
+                    {% endfor %}
+                    {% endif %}
+
+                    {% elif request.session.Module_Convenor == "PE" %}
+                    {% if PE_CW.CW%}
+                    {% for cw in PE_CW.CW %}
+
+                    <a href="{% url cw.module %}" class="list-group-item list-group-item-action">
+                        <span class="fw-bold text-secondary">
+
+                            {{cw.Title}}
+                        </span>
+                        <br> {{cw.Submission_Date}}
+                    </a>
+
+                    {% endfor %}
+                    {% endif %}
+
+                    {% elif request.session.Module_Convenor == "AI" %}
+                    {% if AI_CW.CW%}
+                    {% for cw in AI_CW.CW %}
+
+                    <a href="{% url cw.module %}" class="list-group-item list-group-item-action">
+                        <span class="fw-bold text-secondary">
+
+                            {{cw.Title}}
+                        </span>
+
+                        <br> {{cw.Submission_Date}}
+                    </a>
+
+                    {% endfor %}
+                    {% endif %}
+                    {% endif %}
+
+                    {% endif %}
+
+                </ul>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="toast-container">
+        <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true" data-delay="500">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Welcome Back {{request.user.username}}
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.toast').toast('show');
+        });
+    </script>
+
+
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+    </body>
+
+    {% endblock %}

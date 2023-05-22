@@ -1,0 +1,56 @@
+
+
+
+{% extends 'home/base.html' %}
+{% block content %}
+{%  load static %}
+
+<div class="container-fluid p-5">
+    <div class="row justify-content-center">
+        <div class="col-9 ">
+            <div class="card shadow rounded">
+              <div class="row">
+                <div class="col-5">
+                    <img src="{% static 'assets/auth_meth.jpg' %}" alt="Image" class="card-img">
+                </div>
+                <div class="col-7">
+                    <h3 class="card-title text-center pt-5">
+                        <strong>List of Authentication Methods</strong>
+                    </h3>
+                    
+                    <div class="card-body text-center">
+                        <span class="text-muted"></span>
+                        <p>Welcome back  <b>{{ request.session.username }}</b>
+                            <br>
+                            Choose your preferred authentication method
+                           
+                        </p>
+                    </span>
+                        {%if msg %}
+                            <span class="text-danger">{{ msg }}</span>
+    
+                        {% endif %}
+                        <div class="list-group">
+                            
+                            <a href="{%url 'FIDO_Login'%}" class="list-group-item list-group-item-action">FIDO2</a>
+                            <a href="{%url 'Password_Login'%}" class="list-group-item list-group-item-action">Password</a>
+                            <a href="{%url 'otp_login'%}" class="list-group-item list-group-item-action">One-Time-Passcode</a>
+                            
+                          </div>
+    
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}

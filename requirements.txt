@@ -1,0 +1,20 @@
+Django
+fido2 == 1.0.0
+Unipath
+python-decouple
+jsonfield
+simplejson
+django-endesive
+django-twilio
+django-phonenumber-field
+ua-parser
+django-sslserver
+django-jquery
+django-multiselectfield
+django-extensions
+psycopg2
+python-jose
+django-user-agents
+user-agents
+pyyaml
+whitenoise

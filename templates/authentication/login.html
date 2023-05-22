@@ -1,0 +1,105 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+
+{% load static %}
+
+
+<!-- md - medium size -->
+<div class="container-lg p-5">
+  <div class="row justify-content-center">
+    <div class="col-9 ">
+      <div class="card shadow rounded">
+        <div class="row">
+          <div class="col-5">
+            <img src="{% static 'assets/login.jpg' %}" alt="Image" class="card-img">
+          </div>
+          <div class="col-7">
+            
+            <div class="card-body">
+              
+              <form role="form" method="post" action="">
+                {% csrf_token %}
+                
+                <h3 class="card-title text-center pt-5">
+                  <img class="img-fluid"  src="{% static 'assets/svg/person.svg'%}" alt="Logo" width="30" height="10">
+                  <b>User Login</b>
+                  </h3>
+                
+                <h6 class="card-category text-center">
+                  {% if msg %}
+                  <span class="text-danger ">{{ msg }}</span>
+  
+                  {% endif %}
+                </h6>
+                
+                <div class="mb-3 ">
+                  
+                  
+                  {{ form.username }}
+  
+                </div>
+                {%if mode == "Password"%}
+                <div class="mb-3">
+  
+                  {{ form.password }}
+                  <div id="Username" class="form-text">Your password must be 8-20 characters long, contain letters and
+                    numbers, and must not contain spaces, special characters, or emoji.</div>
+                </div>
+                {% endif %}
+  
+  
+                <button type="submit" name="login" class="btn w-100 btn-success">Login</button>
+  
+                {%if mode == "Password"%}
+              
+                {% if request.session.Multi_Factor_Authentication == False %}
+                <a href="{%url 'preferred_auth_meth'%}">Choose an alternative authentication method</a>
+                {% endif %}
+                {% else %}
+                <a href="{%url 'register'%}">If you dont have an account register here</a>
+                {% endif %}
+  
+  
+  
+              </form>
+  
+            </div>
+  
+          </div>
+  
+  
+  
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+  
+</div>
+
+
+<style>
+  div.absolute {
+    position: absolute;
+    top: 150px;
+    left: 100px;
+    width: 800px;
+    height: 200px;
+
+  }
+
+  .p1 {
+    font-family: "Verdana", Times, serif;
+  }
+
+  .h {
+    font-size: 6em;
+  }
+</style>
+
+
+
+{% endblock %}

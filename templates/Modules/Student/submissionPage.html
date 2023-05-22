@@ -1,0 +1,256 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+
+
+
+<div class="container-fluid my-4 px-4">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="card shadow-sm">
+
+
+                        <div class="card-body">
+                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{%url 'home' %}">Home</a></li>
+                                    {% if request.session.Module == "AI"%}
+                                    <li class="breadcrumb-item"> <a href="{%url 'AI' %}"> Artificial Intelligence and
+                                            Intelligent System</a> </li>
+                                    {% elif request.session.Module == "HDL"%}
+                                    <li class="breadcrumb-item"> <a href="{%url 'HDL' %}"> HDL for Programmable Logic
+                                            with
+                                            Project</a> </li>
+                                    {% elif request.session.Module == "PE"%}
+                                    <li class="breadcrumb-item"> <a href="{%url 'PE' %}"> Power Electronic Application
+                                            and
+                                            Control</a> </li>
+
+                                    {% endif %}
+                                    <li class="breadcrumb-item active" aria-current="page"> {{request.session.CW}}
+                                        Submission
+                                        Page</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% if request.session.Type == "Individual" %}
+
+
+<div class="container-fluid my-4 px-4">
+    <div class="row pb-3">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row pb-3">
+                        <div class="col">
+                            <div class="card px-2 py-3 shadow-sm">
+                                <div class="card-title px-3">
+                                    <span class="fw-bold text-secondary">
+
+                                        <h2 class="mb-1">
+                                            {{request.session.CW}} Submission Box (Individual)
+
+                                        </h2>
+                                    </span>
+                                </div>
+                                <!-- Submission Box -->
+                                <div class="card-body">
+                                    {% if submission_list %}
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="fw-bold text-secondary">
+                                                <h5>Your Submission</h5>
+                                            </span>
+
+                                            <a href="{{ MEDIA_URL }}{{submission_list.list.docfile_individual}}"
+                                                download>
+                                                <img src="{% static 'assets/download.png' %}" alt="Image" height="100" width="auto">
+                                            
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col">
+                                            <form action="{% url 'Submission_Page' request.session.CW %}" method="post"
+                                                enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <p>{{ form1.non_field_errors }}</p>
+                                                <p>{{ form1.docfile_individual.label_tag }}
+                                                    {{form1.docfile_individual.help_text }}</p>
+                                                <p>
+                                                    {{ form1.docfile_individual.errors }}
+                                                    {{ form1.docfile_individual }}
+                                                </p>
+                                                {% if submission_list %}
+                                                <button type="submit" class="btn btn-primary">Re-Upload</button>
+                                                {% else %}
+                                                <button type="submit" class="btn btn-success">Upload</button>
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- Upload form. Note enctype attribute! -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+{% elif request.session.Type == "Group" %}
+
+<div class="container-fluid my-4 px-4">
+    <div class="row pb-3">
+        <div class="col">
+
+            <div class="card px-2 py-3 shadow">
+                <div class="card-title px-3">
+                    <span class="fw-bold text-secondary">
+
+                        <h2 class="mb-1">
+                            {{request.session.CW}} Submission Box (Group)
+                        </h2>
+                    </span>
+                    {% if msg == 'Invalid' %}
+                    <span class="fw-bold text-danger">
+                        <p>Invalid user... Please try again.</p>
+                    </span>
+                    {% endif %}
+                </div>
+                <!-- Submission Box -->
+                <div class="card-body">
+                    <!-- List of uploaded documents -->
+
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            {% if submission_list %}
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="fw-bold text-secondary">
+                                                <h5>Your Submission</h5>
+                                            </span>
+
+                                            <a href="{{ MEDIA_URL }}{{submission_list.list.docfile_group}}"
+                                                download>
+                                                <img src="{% static 'assets/download.png' %}" alt="Image" height="100" width="auto">
+                                            
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                            <br>
+                            <form method="post">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        <h4>Are you the leader?</h4>
+                                    </label>
+                                    {{ form3.choice_field }}
+                                </div>
+                                <div class="mb-3">
+
+                                    {{ form3.leader_username }}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                            </form>
+
+                            {% if msg == "Valid"%}
+                            <form action="{% url 'Submission_Page' request.session.CW %}" method="post"
+                                enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <p>{{ form2.non_field_errors }}</p>
+                                <p>{{ form2.docfile_group.label_tag }} {{ form2.docfile_group.help_text }}</p>
+                                <p>
+                                    {{ form2.docfile_group.errors }}
+
+                                    {{ form2.docfile_group }}
+                                </p>
+                                {% if submission_list %}
+                                <button type="submit" class="btn btn-primary">Re-Upload</button>
+                                {% else %}
+                                <button type="submit" class="btn btn-success">Upload</button>
+                                {% endif %}
+                            </form>
+                            {% endif %}
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=radio][name=choice_field]').change(function () {
+            if (this.value === 'option2') {
+                $('#id_leader_username').show();
+            } else {
+                $('#id_leader_username').hide();
+            }
+        });
+    });
+
+
+</script>
+
+<script src="{% static 'jquery/jquery.min.js'%}"></script>
+<script src="{%static 'jquery-easing/jquery.easing.min.js'%}"></script>
+<link rel="stylesheet" href="../../static/css/main.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+
+{% endblock %}

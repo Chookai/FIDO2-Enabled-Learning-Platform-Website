@@ -1,0 +1,122 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-lg">
+	<div class="row justify-content-md-center">
+
+		<div class="col">
+			<div class="card border-2 m-3">
+				<div class="row">
+					<div class="col-5">
+						<img src="{% static 'assets/Registration.jpg' %}" alt="Image" class="card-img">
+					</div>
+					<div class="col-7">
+
+						<form method="post" action="">
+
+							{% csrf_token %}
+							
+							<div class="card-body">
+								<h3 class="title text-center"><b>Additional Details</b>
+									</h3>
+								{% if msg %}
+								{% for m in msg %}
+								<h6 class="card-category text-center">
+									<span class="text-danger text-center">{{ m }}</span>
+									<br>
+									{% endfor %}
+								</h6>
+								{% endif %}
+
+
+								<div class="row">
+
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Phone Number</label>
+											<br>
+											{{ form.number }}
+
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="mb-3">
+											<label class="form-label">Extension</label>
+											<br>
+											{{ form.extension }}
+
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">
+
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Role</label>
+											<br>
+											{{ form.role}}
+
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="mb-6">
+											<label class="form-label">Module Convenor</label>
+											{{ form.module_convenor }}
+
+										</div>
+										<div class="form-text">Fill this if you are a lecturer</div>
+									</div>
+									<span class="text-danger">{{ form.email.errors }}</span>
+								</div>
+								<div class="row">
+
+									<div class="col-6">
+										<div class="mb-3">
+											<label class="form-label">Default authentication</label>
+											<br>
+											{{ form.default_authentication_method }}
+
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="mb-6">
+											<label class="form-label">Multi Factor Authentication</label>
+											<br>
+											{% for a in form.multi_factor_authentication_method %}
+											{{ a }} &nbsp &nbsp &nbsp
+											{% endfor %}
+
+										</div>
+										<div class="form-text">Compulsory for lecturers</div>
+									</div>
+
+								</div>
+								<br>
+								<button type="submit" name="register"
+								class="btn btn-fill btn-primary w-100">Register</button>
+							&nbsp; &nbsp;
+
+
+
+								
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

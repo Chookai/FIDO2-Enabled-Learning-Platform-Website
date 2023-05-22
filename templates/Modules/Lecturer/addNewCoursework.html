@@ -1,0 +1,43 @@
+{% load static%}
+
+<div class="card p-2 ">
+    <form role="form" method="post" action="">
+
+        {% csrf_token %}
+        <div class="card-title px-3">
+            <span class="fw-bold text-secondary">
+
+                <h2 class="mb-1">
+                    Create New Coursework
+                </h2>
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <br>
+                {{ form.Title }}
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Submission Date</label>
+                <br>
+                {{ form.Submission_Date }}
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type</label>
+                <br>
+                {{ form.Type}}
+
+            </div>
+            <div class="p-2">
+                <button type="submit" name="login" class="btn btn-fill btn-primary justify-content-end">Submit</button>
+                &nbsp; &nbsp;
+
+            </div>
+
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% load static %}
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script type="application/javascript" src="{% static 'js/cbor.js'%}"></script>
+    <script type="application/javascript" src="{% static 'js/ua-parser.min.js'%}"></script>
+    <script src="{% static 'jquery/jquery.min.js'%}"></script>
+
+    <style>
+      body {
+         background-image: url('{%static 'assets/bg_blue.jpg'%}');
+         font-family: 'Oswald', sans-serif !important;
+         background-size: cover;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+      }
+      </style>
+     <title>Pseudo-Moodle</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}">
+  </head>
+
+  
+  <body>
+   
+    <nav class="navbar navbar-expand-md bg-light shadow-sm ">
+      <div class="container-fluid">
+          <a href="{% url 'home' %}" class="navbar-brand ">
+   
+           <img class="img-fluid"  src="{% static 'assets/UON_Logo.png'%}" alt="Logo" width="180" height="65">
+
+          </a>
+          <!-- toggle button for mobile nav -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false"
+          aria-label="Toggle Navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <!-- navbar links -->
+          <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+              <u1 class="navbar-nav d-flex align-items-center">
+                {% if user.is_authenticated %}
+    
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    
+                    <font size="5" face="arial" color="black">
+                        {{ request.user.username }}
+                    </font>
+                    <img class="img-fluid"  src="{% static 'assets/user.png'%}" alt="Logo" width="30" height="10">
+                    
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'profile_page' %}">Profile</a></li>
+                    
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                
+                  </ul>
+                </li>
+                
+              </li>
+              {%else%}
+                You are not logged in.
+              {% endif %} 
+
+              <li class="nav-item">
+                <button type = "button" href="#sidebar" class="btn  me-2" data-bs-toggle="offcanvas"
+                role="button" aria-controls="sidebar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+                
+              </li>
+              
+    
+              </u1>
+          </div>
+      </div>
+    
+    </nav>
+      
+    <!-- offcanvas for nusearch -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebar" 
+    aria-labelledby="sidebar-label">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" 
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
+            <a href="#" class="list-group-item list-group-item-action">Echo360</a>
+            <a href="#" class="list-group-item list-group-item-action">BlueCastle</a>
+            
+          </div>
+        
+        </div>
+    </div>
+    
+  <div class="content">
+    {% block content %}
+  
+    {% endblock %}
+ 
+
+    
+    
+    {% load static %}
+    <script src="{%static 'jquery-easing/jquery.easing.min.js'%}"></script>
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script> 
+    {% block head %}
+
+    {% endblock %} 
+  </div> 
+  </body>
+
+  <!-- Footer -->
+  <footer class="text-center text-lg-start bg-white text-muted ">
+    <div class="shadow-sm">
+
+    
+  <!-- Section: Social media -->
+
+
+  <!-- Section: Links  -->
+  <section class=" ">
+    <div class="container-lg text-md-start pt-3 ">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4 text-start">
+          <!-- Links -->
+          <h5 class="text-uppercase fw-bold mb-6">
+           Site Information
+          </h5>
+          <p>
+            <a href="#!" class="text-reset">Moodle help for Students</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Moodle help for Staff</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Terms of use</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">UK email access-information</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">China email access-information</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Malaysia email access-information</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Data Privacy Notice</a>
+          </p>
+          <p>
+            <a href="#!" class="text-reset">Accesibility Statement</a>
+          </p>
+        
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4">
+          <!-- Links -->
+          <h5 class="text-uppercase fw-bold mb-4">
+            Get in touch
+          </h5>
+          
+          <p>
+            China <br>
+            +86 (0574) 8818 0000 (ext.8915) <br>
+            <a href="#!" class="text-reset"> learning-technologies@nottingham.edu.cn</a>
+          </p>
+          <p>
+            Malaysia <br>
+            +6 (03) 8924 8199 <br>
+            <a href="#!" class="text-reset"> ITServiceDesk@nottingham.edu.my</a>
+          </p>
+          <p>
+            United Kingdom <br>
+            +44 (0115) 9516677 (24hrs) <br>
+            <a href="#!" class="text-reset"> https://selfservice.nottingham.ac.uk</a>
+          </p>
+          
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+    © 2023 Copyright:
+    <h6>University of Nottingham Malaysia CSK Development</h6>
+    
+  </div>
+  <!-- Copyright -->
+</div>
+</footer>
+<!-- Footer -->
+
+
+
+</html>
+
+
